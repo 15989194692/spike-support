@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName ActivityInfoJDBC
@@ -32,6 +33,7 @@ public class ActivityInfoJDBC implements ActivityRepository {
 
     @Override
     public List<ActivityInfo> queryByCondition(ActivityInfoQuery activityInfoQuery) {
-        return null;
+        List<ActivityInfoDO> activityInfoDOS = activityInfoDOMapper.selectByCondition(activityInfoQuery);
+        return activityInfoDOS.stream().map(activityInfoDOConverter::toDomain).collect(Collectors.toList());
     }
 }

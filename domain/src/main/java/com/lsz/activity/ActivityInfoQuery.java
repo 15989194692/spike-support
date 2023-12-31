@@ -1,5 +1,9 @@
 package com.lsz.activity;
 
+import com.lsz.common.query.QueryOrderByClause;
+
+import java.util.List;
+
 /**
  * @ClassName ActivityInfoQuery
  * @Description TODO
@@ -10,4 +14,7 @@ package com.lsz.activity;
 public class ActivityInfoQuery {
 
 
+    private List<Long> activityIds;
+
+    private QueryOrderByClause orderByClause;
 }
