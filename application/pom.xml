@@ -5,9 +5,11 @@
     <parent>
         <artifactId>spike-support</artifactId>
         <groupId>com.lsz.spike-support</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <version>1.0.0</version>
 
     <artifactId>application</artifactId>
 
