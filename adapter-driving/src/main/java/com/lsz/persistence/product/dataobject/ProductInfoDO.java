@@ -1,4 +1,4 @@
-package com.lsz.persistence.product;
+package com.lsz.persistence.product.dataobject;
 
 import java.io.Serializable;
 

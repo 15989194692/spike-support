@@ -1,4 +1,4 @@
-package com.lsz.persistence.product;
+package com.lsz.persistence.product.dataobject;
 
 import java.util.ArrayList;
 import java.util.List;
