@@ -1,4 +1,4 @@
-package com.lsz.persistence.activity;
+package com.lsz.persistence.activity.dataobject;
 
 import java.util.ArrayList;
 import java.util.List;

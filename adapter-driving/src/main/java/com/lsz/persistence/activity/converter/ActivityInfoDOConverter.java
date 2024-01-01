@@ -1,9 +1,10 @@
-package com.lsz.persistence.activity;
+package com.lsz.persistence.activity.converter;
 
 import com.lsz.activity.ActivityInfo;
 import com.lsz.activity.ActivityStatusEnum;
 import com.lsz.common.valueobject.DateRange;
 import com.lsz.common.valueobject.Money;
+import com.lsz.persistence.activity.dataobject.ActivityInfoDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

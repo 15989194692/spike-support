@@ -7,6 +7,7 @@ import com.lsz.activity.command.CreateActivityCommand;
 import com.lsz.activity.dto.CreateActivityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,13 +29,13 @@ public class ActivityController {
     private ActivityApplicationService activityApplicationService;
 
     @PostMapping("/create")
-    public CreateActivityDto create(CreateActivityCommand command) {
+    public CreateActivityDto create(@RequestBody CreateActivityCommand command) {
         return activityApplicationService.createActivity(command);
     }
 
 
     @PostMapping("/query")
-    public List<ActivityInfoDto> query(ActivityInfoQuery query) {
+    public List<ActivityInfoDto> query(@RequestBody ActivityInfoQuery query) {
         return activityApplicationService.queryByCondition(query);
     }
 

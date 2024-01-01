@@ -1,6 +1,8 @@
-package com.lsz.persistence.activity;
+package com.lsz.persistence.activity.mapper;
 
 import com.lsz.activity.ActivityInfoQuery;
+import com.lsz.persistence.activity.dataobject.ActivityInfoDO;
+import com.lsz.persistence.activity.dataobject.ActivityInfoDOExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

@@ -38,6 +38,13 @@
         </dependency>
         <!-- mybatis -->
 
+        <!-- mapstruct -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+        <!-- mapstruct -->
+
 
     </dependencies>
 
