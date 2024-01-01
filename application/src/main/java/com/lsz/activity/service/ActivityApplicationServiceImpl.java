@@ -5,12 +5,16 @@ import com.lsz.activity.assembler.ActivityInfoDtoAssembler;
 import com.lsz.activity.command.CreateActivityCommand;
 import com.lsz.activity.command.StartActivityCommand;
 import com.lsz.activity.command.StopActivityCommand;
+import com.lsz.activity.domainservice.ActivityDomainService;
 import com.lsz.activity.dto.ActivityInfoDto;
 import com.lsz.activity.dto.CreateActivityDto;
 import com.lsz.activity.dto.StartActivityDto;
 import com.lsz.activity.dto.StopActivityDto;
+import com.lsz.product.ProductInfo;
+import com.lsz.product.ProductInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +38,15 @@ public class ActivityApplicationServiceImpl implements ActivityApplicationServic
     @Autowired
     private ActivityInfoDtoAssembler activityInfoDtoAssembler;
 
+    @Autowired
+    private ProductInfoRepository productInfoRepository;
+
+    @Autowired
+    private ActivityDomainService activityDomainService;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
     @Override
     public CreateActivityDto createActivity(CreateActivityCommand command) {
         ActivityInfoBuilder activityInfoBuilder = activityInfoBuilderFactory.create();
@@ -56,13 +69,17 @@ public class ActivityApplicationServiceImpl implements ActivityApplicationServic
     @Override
     public StartActivityDto startActivity(StartActivityCommand command) {
         ActivityInfo activityInfo = activityRepository.queryByPrimaryId(command.getActivityId());
-
-        activityInfo.startActivity();
-
-        activityRepository.update(activityInfo);
+        ProductInfo productInfo = productInfoRepository.queryByPrimaryId(activityInfo.getProductId());
+        activityDomainService.startSpikeActivity(activityInfo, productInfo);
+        transactionTemplate.execute(action -> {
+            activityRepository.update(activityInfo);
+            productInfoRepository.update(productInfo);
+            return true;
+        });
 
         StartActivityDto startActivityDto = new StartActivityDto();
         startActivityDto.setActivityId(activityInfo.getActivityId());
+        startActivityDto.setProductId(productInfo.getProductId());
         startActivityDto.setSuccss(true);
 
         return startActivityDto;
@@ -71,13 +88,17 @@ public class ActivityApplicationServiceImpl implements ActivityApplicationServic
     @Override
     public StopActivityDto stopActivity(StopActivityCommand command) {
         ActivityInfo activityInfo = activityRepository.queryByPrimaryId(command.getActivityId());
-
-        activityInfo.stopActivity();
-
-        activityRepository.update(activityInfo);
+        ProductInfo productInfo = productInfoRepository.queryByPrimaryId(activityInfo.getProductId());
+        activityDomainService.stopSpikeActivity(activityInfo, productInfo);
+        transactionTemplate.execute(action -> {
+            activityRepository.update(activityInfo);
+            productInfoRepository.update(productInfo);
+            return true;
+        });
 
         StopActivityDto stopActivityDto = new StopActivityDto();
         stopActivityDto.setActivityId(activityInfo.getActivityId());
+        stopActivityDto.setProductId(productInfo.getProductId());
         stopActivityDto.setSuccss(true);
 
         return stopActivityDto;

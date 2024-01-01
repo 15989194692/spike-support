@@ -11,6 +11,8 @@ public class StopActivityDto {
 
     private Long activityId;
 
+    private Long productId;
+
     private Boolean succss;
 
     public Long getActivityId() {
@@ -27,5 +29,13 @@ public class StopActivityDto {
 
     public void setSuccss(Boolean succss) {
         this.succss = succss;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

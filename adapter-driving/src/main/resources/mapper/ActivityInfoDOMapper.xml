@@ -125,6 +125,12 @@
           #{item}
         </foreach>
     </if>
+    <if test="productIds != null and productIds.size() != 0">
+      and product_id in
+      <foreach collection="productIds" item="item" separator="," open="(" close=")">
+        #{item}
+      </foreach>
+    </if>
     <if test="orderByClause != null and orderByClause.clause != null and orderByClause.orderType != null">
       order by #{orderByClause.clause} #{orderByClause.orderType}
     </if>

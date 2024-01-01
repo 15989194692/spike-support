@@ -35,10 +35,22 @@ public class ProductInfoRepositoryImpl implements ProductInfoRepository {
     }
 
     @Override
+    public boolean update(ProductInfo productInfo) {
+        ProductInfoDO productInfoDO = productInfoDOConverter.toDo(productInfo);
+        return productInfoDOMapper.updateByPrimaryKey(productInfoDO) == 1;
+    }
+
+    @Override
     public List<ProductInfo> queryByCondition(ProductInfoQuery query) {
         List<ProductInfoDO> productInfoDOS = productInfoDOMapper.selectByCondition(query);
         return productInfoDOS.stream()
                 .map(productInfoDOConverter::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductInfo queryByPrimaryId(Long productId) {
+        ProductInfoDO productInfoDO = productInfoDOMapper.selectByPrimaryKey(productId);
+        return productInfoDOConverter.toDomain(productInfoDO);
     }
 }

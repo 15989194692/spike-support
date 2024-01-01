@@ -113,7 +113,7 @@
     select 
     <include refid="Base_Column_List" />
     from spike_product
-    where id = #{id,jdbcType=BIGINT}
+    where product_id = #{productId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
@@ -315,7 +315,7 @@
       product_price_amt = #{productPriceAmt,jdbcType=BIGINT},
       ccy = #{ccy,jdbcType=VARCHAR},
       tag = #{tag,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    where product_id = #{productId,jdbcType=BIGINT}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.lsz.persistence.product.dataobject.ProductInfoDOExample" resultMap="BaseResultMap">
     <!--

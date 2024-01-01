@@ -23,6 +23,13 @@ public class ProductInfo {
 
     private ProductTagEnum tag;
 
+    public void spikeStart() {
+        this.tag = ProductTagEnum.SPIKE;
+    }
+    public void spikeStop() {
+        this.tag = ProductTagEnum.NORMAL;
+    }
+
     public Long getId() {
         return id;
     }

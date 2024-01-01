@@ -13,8 +13,33 @@ import java.util.List;
  **/
 public class ActivityInfoQuery {
 
-
     private List<Long> activityIds;
 
+    private List<Long> productIds;
+
     private QueryOrderByClause orderByClause;
+
+    public List<Long> getActivityIds() {
+        return activityIds;
+    }
+
+    public void setActivityIds(List<Long> activityIds) {
+        this.activityIds = activityIds;
+    }
+
+    public List<Long> getProductIds() {
+        return productIds;
+    }
+
+    public void setProductIds(List<Long> productIds) {
+        this.productIds = productIds;
+    }
+
+    public QueryOrderByClause getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setOrderByClause(QueryOrderByClause orderByClause) {
+        this.orderByClause = orderByClause;
+    }
 }

@@ -15,5 +15,11 @@ public interface ProductInfoRepository {
     boolean save(ProductInfo productInfo);
 
 
+    boolean update(ProductInfo productInfo);
+
+
     List<ProductInfo> queryByCondition(ProductInfoQuery query);
+
+
+    ProductInfo queryByPrimaryId(Long productId);
 }
