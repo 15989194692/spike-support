@@ -1,5 +1,6 @@
 package com.lsz.product;
 
+import com.lsz.common.entity.AbstractEntity;
 import com.lsz.common.valueobject.Money;
 
 /**
@@ -9,7 +10,7 @@ import com.lsz.common.valueobject.Money;
  * @Date 2024/1/1 下午1:31
  * @Version 1.0.0
  **/
-public class ProductInfo {
+public class ProductInfo extends AbstractEntity {
 
     private Long id;
 
