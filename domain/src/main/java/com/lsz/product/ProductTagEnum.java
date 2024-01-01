@@ -31,6 +31,14 @@ public enum ProductTagEnum {
         this.desc = desc;
     }
 
+    public boolean isSpike() {
+        return this == SPIKE;
+    }
+
+    public boolean isNormal() {
+        return this == NORMAL;
+    }
+
 
     public String getCode() {
         return code;

@@ -15,6 +15,7 @@ import com.lsz.product.ProductInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,8 +73,10 @@ public class ActivityApplicationServiceImpl implements ActivityApplicationServic
         ProductInfo productInfo = productInfoRepository.queryByPrimaryId(activityInfo.getProductId());
         activityDomainService.startSpikeActivity(activityInfo, productInfo);
         transactionTemplate.execute(action -> {
-            activityRepository.update(activityInfo);
-            productInfoRepository.update(productInfo);
+            boolean updateActivitySuccess = activityRepository.update(activityInfo);
+            Assert.isTrue(updateActivitySuccess, "update activity record fail,activityInfo: " + activityInfo);
+            boolean updateProductSuccess = productInfoRepository.update(productInfo);
+            Assert.isTrue(updateProductSuccess, "update product record fail,productInfo: " + productInfo);
             return true;
         });
 
@@ -91,8 +94,10 @@ public class ActivityApplicationServiceImpl implements ActivityApplicationServic
         ProductInfo productInfo = productInfoRepository.queryByPrimaryId(activityInfo.getProductId());
         activityDomainService.stopSpikeActivity(activityInfo, productInfo);
         transactionTemplate.execute(action -> {
-            activityRepository.update(activityInfo);
-            productInfoRepository.update(productInfo);
+            boolean updateActivitySuccess = activityRepository.update(activityInfo);
+            Assert.isTrue(updateActivitySuccess, "update activity record fail,activityInfo: " + activityInfo);
+            boolean updateProductSuccess = productInfoRepository.update(productInfo);
+            Assert.isTrue(updateProductSuccess, "update product record fail,productInfo: " + productInfo);
             return true;
         });
 

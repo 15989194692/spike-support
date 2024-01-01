@@ -18,6 +18,7 @@
     <result column="activity_picture_url" jdbcType="VARCHAR" property="activityPictureUrl" />
     <result column="activity_price_amt" jdbcType="BIGINT" property="activityPriceAmt" />
     <result column="ccy" jdbcType="VARCHAR" property="ccy" />
+    <result column="cas_version" jdbcType="BIGINT" property="casVersion" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -92,7 +93,7 @@
     -->
     id, activity_id, activity_name, product_id, activity_start_time, activity_end_time, 
     limit_num, stock_num, activity_status, activity_picture_url, activity_price_amt, 
-    ccy
+    ccy,cas_version
   </sql>
   <select id="selectByExample" parameterType="com.lsz.persistence.activity.dataobject.ActivityInfoDOExample" resultMap="BaseResultMap">
     <!--
@@ -128,6 +129,12 @@
     <if test="productIds != null and productIds.size() != 0">
       and product_id in
       <foreach collection="productIds" item="item" separator="," open="(" close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="activityStatus != null and activityStatus.size() != 0">
+      and activity_status in
+      <foreach collection="activityStatus" item="item" separator="," open="(" close=")">
         #{item}
       </foreach>
     </if>
@@ -175,11 +182,11 @@
     insert into spike_activity (activity_id, activity_name, product_id, 
       activity_start_time, activity_end_time, limit_num, 
       stock_num, activity_status, activity_picture_url, 
-      activity_price_amt, ccy)
+      activity_price_amt, ccy, cas_version)
     values (#{activityId,jdbcType=BIGINT}, #{activityName,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, 
       #{activityStartTime,jdbcType=BIGINT}, #{activityEndTime,jdbcType=BIGINT}, #{limitNum,jdbcType=BIGINT}, 
       #{stockNum,jdbcType=BIGINT}, #{activityStatus,jdbcType=VARCHAR}, #{activityPictureUrl,jdbcType=VARCHAR}, 
-      #{activityPriceAmt,jdbcType=BIGINT}, #{ccy,jdbcType=VARCHAR})
+      #{activityPriceAmt,jdbcType=BIGINT}, #{ccy,jdbcType=VARCHAR}, #{casVersion,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.lsz.persistence.activity.dataobject.ActivityInfoDO">
     <!--
@@ -224,6 +231,9 @@
       <if test="ccy != null">
         ccy,
       </if>
+      <if test="casVersion != null">
+        cas_version,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="activityId != null">
@@ -258,6 +268,9 @@
       </if>
       <if test="ccy != null">
         #{ccy,jdbcType=VARCHAR},
+      </if>
+      <if test="casVersion != null">
+        #{casVersion,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -381,8 +394,14 @@
       <if test="ccy != null">
         ccy = #{ccy,jdbcType=VARCHAR},
       </if>
+      <if test="casVersion != null">
+        cas_version = (#{casVersion,jdbcType=BIGINT} + 1)
+      </if>
     </set>
-    where activity_id = #{activityId,jdbcType=BIGINT}
+    where
+        activity_id = #{activityId,jdbcType=BIGINT}
+    and
+        cas_version = #{casVersion,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lsz.persistence.activity.dataobject.ActivityInfoDO">
     <!--
@@ -400,8 +419,12 @@
       activity_status = #{activityStatus,jdbcType=VARCHAR},
       activity_picture_url = #{activityPictureUrl,jdbcType=VARCHAR},
       activity_price_amt = #{activityPriceAmt,jdbcType=BIGINT},
-      ccy = #{ccy,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+      ccy = #{ccy,jdbcType=VARCHAR},
+      cas_version = (#{casVersion,jdbcType=BIGINT} + 1)
+    where
+        activity_id = #{activityId,jdbcType=BIGINT}
+     and
+        cas_version = #{casVersion,jdbcType=BIGINT}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.lsz.persistence.activity.dataobject.ActivityInfoDOExample" resultMap="BaseResultMap">
     <!--

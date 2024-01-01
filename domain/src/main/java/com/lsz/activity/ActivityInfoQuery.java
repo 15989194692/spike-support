@@ -17,6 +17,8 @@ public class ActivityInfoQuery {
 
     private List<Long> productIds;
 
+    private List<String> activityStatus;
+
     private QueryOrderByClause orderByClause;
 
     public List<Long> getActivityIds() {
@@ -41,5 +43,51 @@ public class ActivityInfoQuery {
 
     public void setOrderByClause(QueryOrderByClause orderByClause) {
         this.orderByClause = orderByClause;
+    }
+
+    public List<String> getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(List<String> activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
+    public static class Builder {
+        private List<Long> activityIds;
+
+        private List<Long> productIds;
+
+        private List<String> activityStatus;
+
+        private QueryOrderByClause orderByClause;
+
+        public Builder activityIds(List<Long> activityIds) {
+            this.activityIds = activityIds;
+            return this;
+        }
+
+        public Builder productIds(List<Long> productIds) {
+            this.productIds = productIds;
+            return this;
+        }
+
+        public Builder activityStatus(List<String> activityStatus) {
+            this.activityStatus = activityStatus;
+            return this;
+        }
+
+        public Builder orderByClause(QueryOrderByClause orderByClause) {
+            this.orderByClause = orderByClause;
+            return this;
+        }
+
+        public ActivityInfoQuery build() {
+            ActivityInfoQuery activityInfoQuery = new ActivityInfoQuery();
+            activityInfoQuery.setActivityIds(activityIds);
+            activityInfoQuery.setOrderByClause(orderByClause);
+            activityInfoQuery.setProductIds(productIds);
+            return activityInfoQuery;
+        }
     }
 }

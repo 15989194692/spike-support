@@ -23,6 +23,10 @@ public class ProductInfo {
 
     private ProductTagEnum tag;
 
+    public boolean isSpikeProduct() {
+        return tag.isSpike();
+    }
+
     public void spikeStart() {
         this.tag = ProductTagEnum.SPIKE;
     }

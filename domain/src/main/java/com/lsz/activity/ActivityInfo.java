@@ -1,7 +1,9 @@
 package com.lsz.activity;
 
+import com.lsz.common.entity.AbstractEntity;
 import com.lsz.common.valueobject.DateRange;
 import com.lsz.common.valueobject.Money;
+import org.springframework.util.Assert;
 
 /**
  * @ClassName ActivityInfo
@@ -10,7 +12,7 @@ import com.lsz.common.valueobject.Money;
  * @Date 2023/12/31 下午9:46
  * @Version 1.0.0
  **/
-public class ActivityInfo {
+public class ActivityInfo extends AbstractEntity {
 
     private Long id;
 
@@ -32,6 +34,11 @@ public class ActivityInfo {
 
     private Money activityPrice;
 
+    public void reduceInventory(Long buyNum) {
+        Assert.isTrue(buyNum > 0, "buyNum must be greater than zero,buyNum: " + buyNum);
+        Assert.isTrue(stockNum >= buyNum, "stockNum must be greater or equals than buyNum, stockNum: " + stockNum + ", buyNum: " + buyNum);
+        this.stockNum -= buyNum;
+    }
 
     public void startActivity() {
         this.activityStatus = ActivityStatusEnum.STARTING;
