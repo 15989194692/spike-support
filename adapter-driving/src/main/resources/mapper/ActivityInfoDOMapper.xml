@@ -138,7 +138,7 @@
     select 
     <include refid="Base_Column_List" />
     from spike_activity
-    where id = #{id,jdbcType=BIGINT}
+    where activity_id = #{activityId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
@@ -376,7 +376,7 @@
         ccy = #{ccy,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where activity_id = #{activityId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lsz.persistence.activity.dataobject.ActivityInfoDO">
     <!--

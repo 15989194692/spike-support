@@ -35,8 +35,21 @@ public class ActivityInfoJDBC implements ActivityRepository {
     }
 
     @Override
+    public boolean update(ActivityInfo activityInfo) {
+        ActivityInfoDO activityInfoDO = activityInfoDOConverter.toDO(activityInfo);
+        return activityInfoDOMapper.updateByPrimaryKey(activityInfoDO) == 1;
+    }
+
+    @Override
     public List<ActivityInfo> queryByCondition(ActivityInfoQuery activityInfoQuery) {
         List<ActivityInfoDO> activityInfoDOS = activityInfoDOMapper.selectByCondition(activityInfoQuery);
         return activityInfoDOS.stream().map(activityInfoDOConverter::toDomain).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public ActivityInfo queryByPrimaryId(Long activityId) {
+        ActivityInfoDO activityInfoDO = activityInfoDOMapper.selectByPrimaryKey(activityId);
+        return activityInfoDOConverter.toDomain(activityInfoDO);
     }
 }

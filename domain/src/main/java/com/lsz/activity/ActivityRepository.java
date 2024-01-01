@@ -13,5 +13,10 @@ public interface ActivityRepository {
 
     boolean save(ActivityInfo activityInfo);
 
+    boolean update(ActivityInfo activityInfo);
+
     List<ActivityInfo> queryByCondition(ActivityInfoQuery activityInfoQuery);
+
+    ActivityInfo queryByPrimaryId(Long activityId);
+
 }

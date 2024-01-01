@@ -32,6 +32,16 @@ public class ActivityInfo {
 
     private Money activityPrice;
 
+
+    public void startActivity() {
+        this.activityStatus = ActivityStatusEnum.STARTING;
+    }
+
+
+    public void stopActivity() {
+        this.activityStatus = ActivityStatusEnum.FINISHED;
+    }
+
     public Long getId() {
         return id;
     }

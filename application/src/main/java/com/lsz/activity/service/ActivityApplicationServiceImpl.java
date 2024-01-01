@@ -3,8 +3,12 @@ package com.lsz.activity.service;
 import com.lsz.activity.*;
 import com.lsz.activity.assembler.ActivityInfoDtoAssembler;
 import com.lsz.activity.command.CreateActivityCommand;
+import com.lsz.activity.command.StartActivityCommand;
+import com.lsz.activity.command.StopActivityCommand;
 import com.lsz.activity.dto.ActivityInfoDto;
 import com.lsz.activity.dto.CreateActivityDto;
+import com.lsz.activity.dto.StartActivityDto;
+import com.lsz.activity.dto.StopActivityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +51,36 @@ public class ActivityApplicationServiceImpl implements ActivityApplicationServic
         CreateActivityDto createActivityDto = new CreateActivityDto();
         createActivityDto.setActivityId(activityInfo.getActivityId());
         return createActivityDto;
+    }
+
+    @Override
+    public StartActivityDto startActivity(StartActivityCommand command) {
+        ActivityInfo activityInfo = activityRepository.queryByPrimaryId(command.getActivityId());
+
+        activityInfo.startActivity();
+
+        activityRepository.update(activityInfo);
+
+        StartActivityDto startActivityDto = new StartActivityDto();
+        startActivityDto.setActivityId(activityInfo.getActivityId());
+        startActivityDto.setSuccss(true);
+
+        return startActivityDto;
+    }
+
+    @Override
+    public StopActivityDto stopActivity(StopActivityCommand command) {
+        ActivityInfo activityInfo = activityRepository.queryByPrimaryId(command.getActivityId());
+
+        activityInfo.stopActivity();
+
+        activityRepository.update(activityInfo);
+
+        StopActivityDto stopActivityDto = new StopActivityDto();
+        stopActivityDto.setActivityId(activityInfo.getActivityId());
+        stopActivityDto.setSuccss(true);
+
+        return stopActivityDto;
     }
 
     @Override
