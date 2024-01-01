@@ -4,7 +4,9 @@ import com.lsz.activity.ActivityInfo;
 import com.lsz.activity.ActivityInfoQuery;
 import com.lsz.activity.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
  * @Date 2023/12/31 下午9:45
  * @Version 1.0.0
  **/
-@Repository
+@Service
 public class ActivityInfoJDBC implements ActivityRepository {
 
     @Autowired

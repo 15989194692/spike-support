@@ -1,17 +1,16 @@
-package com.lsz.activity;
+package com.lsz.activity.dto;
 
 import com.lsz.common.valueobject.DateRange;
 import com.lsz.common.valueobject.Money;
 
 /**
- * @ClassName ActivityInfo
+ * @ClassName ActivityInfoDto
  * @Description TODO
  * @Author lishuzeng
- * @Date 2023/12/31 下午9:46
+ * @Date 2024/1/1 上午10:25
  * @Version 1.0.0
  **/
-public class ActivityInfo {
-
+public class ActivityInfoDto {
     private Long id;
 
     private Long activityId;
@@ -26,7 +25,7 @@ public class ActivityInfo {
 
     private Long stockNum;
 
-    private ActivityStatusEnum activityStatus;
+    private String activityStatus;
 
     private String activityPictureUrl;
 
@@ -88,11 +87,11 @@ public class ActivityInfo {
         this.stockNum = stockNum;
     }
 
-    public ActivityStatusEnum getActivityStatus() {
+    public String getActivityStatus() {
         return activityStatus;
     }
 
-    public void setActivityStatus(ActivityStatusEnum activityStatus) {
+    public void setActivityStatus(String activityStatus) {
         this.activityStatus = activityStatus;
     }
 

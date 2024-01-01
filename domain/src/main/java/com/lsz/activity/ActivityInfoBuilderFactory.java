@@ -17,7 +17,7 @@ public class ActivityInfoBuilderFactory {
     @Autowired
     private SequenceService sequenceService;
 
-    ActivityInfoBuilder create() {
+    public ActivityInfoBuilder create() {
         return new ActivityInfoBuilder(sequenceService);
     }
 

@@ -1,4 +1,4 @@
-package com.lsz.activity;
+package com.lsz.activity.command;
 
 import com.lsz.common.valueobject.DateRange;
 import com.lsz.common.valueobject.Money;

@@ -1,7 +1,9 @@
 package com.lsz;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @ClassName BootStrapApplication
@@ -11,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Version 1.0.0
  **/
 @SpringBootApplication
+@MapperScan(basePackages = "com.lsz.persistence")
 public class BootStrapApplication {
 
     public static void main(String[] args) {

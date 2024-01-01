@@ -1,6 +1,7 @@
 package com.lsz.persistence.activity;
 
 import com.lsz.activity.ActivityInfo;
+import com.lsz.activity.ActivityStatusEnum;
 import com.lsz.common.valueobject.DateRange;
 import com.lsz.common.valueobject.Money;
 import org.mapstruct.Mapper;
@@ -13,7 +14,7 @@ import org.mapstruct.Mapping;
  * @Date 2023/12/31 下午9:49
  * @Version 1.0.0
  **/
-@Mapper(componentModel = "spring", imports = {Money.class, DateRange.class})
+@Mapper(componentModel = "spring", imports = {Money.class, DateRange.class, ActivityStatusEnum.class})
 public interface ActivityInfoDOConverter {
 
     @Mapping(target = "activityStartTime", expression = "java(source.getActivityTime().getBeginDateTimestamp())")

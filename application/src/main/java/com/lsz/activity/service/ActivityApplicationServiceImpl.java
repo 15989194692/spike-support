@@ -1,7 +1,15 @@
-package com.lsz.activity;
+package com.lsz.activity.service;
 
+import com.lsz.activity.*;
+import com.lsz.activity.assembler.ActivityInfoDtoAssembler;
+import com.lsz.activity.command.CreateActivityCommand;
+import com.lsz.activity.dto.ActivityInfoDto;
+import com.lsz.activity.dto.CreateActivityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName ActivityApplicationImpl
@@ -11,13 +19,16 @@ import org.springframework.stereotype.Service;
  * @Version 1.0.0
  **/
 @Service
-public class ActivityApplicationImpl implements ActivityApplication {
+public class ActivityApplicationServiceImpl implements ActivityApplicationService {
 
     @Autowired
     private ActivityRepository activityRepository;
 
     @Autowired
     private ActivityInfoBuilderFactory activityInfoBuilderFactory;
+
+    @Autowired
+    private ActivityInfoDtoAssembler activityInfoDtoAssembler;
 
     @Override
     public CreateActivityDto createActivity(CreateActivityCommand command) {
@@ -36,5 +47,13 @@ public class ActivityApplicationImpl implements ActivityApplication {
         CreateActivityDto createActivityDto = new CreateActivityDto();
         createActivityDto.setActivityId(activityInfo.getActivityId());
         return createActivityDto;
+    }
+
+    @Override
+    public List<ActivityInfoDto> queryByCondition(ActivityInfoQuery query) {
+        List<ActivityInfo> activityInfos = activityRepository.queryByCondition(query);
+        return activityInfos.stream()
+                .map(activityInfoDtoAssembler::assemble)
+                .collect(Collectors.toList());
     }
 }

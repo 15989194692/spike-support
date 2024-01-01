@@ -1,12 +1,11 @@
 package com.lsz.persistence.activity;
 
 import com.lsz.activity.ActivityInfoQuery;
-import com.lsz.persistence.activity.ActivityInfoDO;
-import com.lsz.persistence.activity.ActivityInfoDOdExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
 
 @Mapper
 public interface ActivityInfoDOMapper {

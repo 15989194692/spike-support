@@ -85,7 +85,7 @@ public class ActivityInfoBuilder {
         activityInfo.setActivityName(activityName);
         activityInfo.setActivityPictureUrl(activityPictureUrl);
         activityInfo.setActivityPrice(activityPrice);
-        activityInfo.setActivityStatus(activityStatus);
+        activityInfo.setActivityStatus(ActivityStatusEnum.getByCode(activityStatus));
         activityInfo.setActivityTime(activityTime);
         activityInfo.setLimitNum(limitNum);
         activityInfo.setStockNum(stockNum);

@@ -1,12 +1,16 @@
 package com.lsz.http.activity;
 
-import com.lsz.activity.ActivityApplication;
-import com.lsz.activity.CreateActivityCommand;
-import com.lsz.activity.CreateActivityDto;
+import com.lsz.activity.dto.ActivityInfoDto;
+import com.lsz.activity.service.ActivityApplicationService;
+import com.lsz.activity.ActivityInfoQuery;
+import com.lsz.activity.command.CreateActivityCommand;
+import com.lsz.activity.dto.CreateActivityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @ClassName ActivityController
@@ -21,11 +25,17 @@ public class ActivityController {
 
 
     @Autowired
-    private ActivityApplication activityApplication;
+    private ActivityApplicationService activityApplicationService;
 
     @PostMapping("/create")
     public CreateActivityDto create(CreateActivityCommand command) {
-        return activityApplication.createActivity(command);
+        return activityApplicationService.createActivity(command);
+    }
+
+
+    @PostMapping("/query")
+    public List<ActivityInfoDto> query(ActivityInfoQuery query) {
+        return activityApplicationService.queryByCondition(query);
     }
 
 }

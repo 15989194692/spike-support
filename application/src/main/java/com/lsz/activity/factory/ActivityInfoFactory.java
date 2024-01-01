@@ -1,4 +1,7 @@
-package com.lsz.activity;
+package com.lsz.activity.factory;
+
+import com.lsz.activity.ActivityInfo;
+import com.lsz.activity.command.CreateActivityCommand;
 
 /**
  * @ClassName ActivityInfoFactory

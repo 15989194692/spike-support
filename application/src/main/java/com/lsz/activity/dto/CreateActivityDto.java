@@ -1,4 +1,4 @@
-package com.lsz.activity;
+package com.lsz.activity.dto;
 
 /**
  * @ClassName CreateActivityDto
