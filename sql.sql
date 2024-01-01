@@ -22,9 +22,10 @@ CREATE TABLE `spike_activity` (
   `activity_picture_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '活动商品图片',
   `activity_price_amt` bigint unsigned NOT NULL COMMENT '活动金额',
   `ccy` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '币种',
+  `cas_version` bigint unsigned NOT NULL DEFAULT '0' COMMENT '版本号，用于乐观锁',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_activity_id` (`activity_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `spike_order` (
@@ -39,10 +40,10 @@ CREATE TABLE `spike_order` (
   `pay_type` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '支付方式',
   `order_time` bigint unsigned NOT NULL COMMENT '订单下单时间',
   `order_status` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '订单状态',
+  `cas_version` bigint unsigned NOT NULL DEFAULT '0' COMMENT '版本号，乐观锁实现',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_order_id` (`order_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `spike_product` (
@@ -53,10 +54,10 @@ CREATE TABLE `spike_product` (
   `product_price_amt` bigint unsigned NOT NULL COMMENT '商品价格',
   `ccy` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '币种',
   `tag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '标识',
+  `cas_version` bigint unsigned NOT NULL COMMENT '版本号，乐观锁实现',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_product_id` (`product_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
