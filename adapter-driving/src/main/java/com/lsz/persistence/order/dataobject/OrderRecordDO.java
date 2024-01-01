@@ -1,4 +1,4 @@
-package com.lsz.persistence.order;
+package com.lsz.persistence.order.dataobject;
 
 import java.io.Serializable;
 
